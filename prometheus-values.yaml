@@ -1,0 +1,28 @@
+﻿alertmanager:
+  enabled: false
+
+extraScrapeConfigs: |
+  - job_name: 'fastapi'
+    metrics_path: /metrics
+    static_configs:
+      - targets:
+          - 'fastapi-service.default.svc.cluster.local:8000'
+
+  - job_name: 'fastapi-project4'
+    metrics_path: /metrics
+    static_configs:
+      - targets:
+          - 'fastapi-service.project4.svc.cluster.local:8000'
+
+prometheus-pushgateway:
+  enabled: false
+server:
+  persistentVolume:
+    enabled: false
+  resources:
+    limits:
+      cpu: 500m
+      memory: 512Mi
+    requests:
+      cpu: 100m
+      memory: 256Mi
